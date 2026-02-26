@@ -2,51 +2,49 @@ import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-ico
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    Dimensions,
-    Modal,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    View
+  Modal,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 import HamburgerMenu from './hamburger';
 
-const { width } = Dimensions.get('window');
-
 export default function ProfileScreen() {
   const router = useRouter();
-
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       
-      {/* --- 2. Hamburger Modal --- */}
+      {/* --- Hamburger Modal --- */}
       <Modal
         animationType="fade"
         transparent={true}
         visible={isMenuVisible}
         onRequestClose={() => setIsMenuVisible(false)}
       >
-        <div style={styles.modalOverlay}>
+        {/* CHANGED THIS FROM <div> TO <View> */}
+        <View style={styles.modalOverlay}>
           <HamburgerMenu onClose={() => setIsMenuVisible(false)} />
+          
           <TouchableWithoutFeedback onPress={() => setIsMenuVisible(false)}>
             <View style={styles.clickableOverlay} />
           </TouchableWithoutFeedback>
-        </div>
+        </View>
       </Modal>
 
       {/* --- Header --- */}
       <View style={styles.header}>
-        {/* --- 3. Trigger Menu Open --- */}
         <TouchableOpacity onPress={() => setIsMenuVisible(true)}>
           <Ionicons name="menu" size={28} color="white" />
         </TouchableOpacity>
         
         <Text style={styles.headerTitle}>Profile</Text>
+        
         <TouchableOpacity>
           <MaterialCommunityIcons name="qrcode-scan" size={24} color="white" />
         </TouchableOpacity>
@@ -74,7 +72,7 @@ export default function ProfileScreen() {
           </View>
 
           <View style={styles.userInfoHeader}>
-            <Text style={styles.userName}>JOHN DOE D. PIILI</Text>
+            <Text style={styles.userName}>JOHN DOE D. PILI</Text>
             <Text style={styles.userRole}>Bachelor of Elementary Education</Text>
             <Text style={styles.userEmailSmall}>johndoejacat10@gmail.com</Text>
           </View>
